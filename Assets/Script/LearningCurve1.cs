@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LearningCurve : MonoBehaviour
+public class LearningCurve1 : MonoBehaviour
 {
     [SerializeField]
     float currentAge = 35f;
