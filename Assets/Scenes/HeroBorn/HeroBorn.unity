@@ -227,24 +227,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446702550}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &761474750 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4587949343240129060, guid: f414046b173d2ad49afb4fc27c3cbae8, type: 3}
-  m_PrefabInstance: {fileID: 3260313904843152515}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &761474755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761474750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71da5845cb9deaf4fb798997c20b05f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 50
 --- !u!1001 &1092802456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -804,6 +786,7 @@ GameObject:
   - component: {fileID: 1764682911}
   - component: {fileID: 1764682914}
   - component: {fileID: 1764682915}
+  - component: {fileID: 1764682916}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -940,6 +923,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &1764682916
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764682909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 72de5fea186c1b2458c3cb4901026258, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1870460853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,9 +1151,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2882359144339677801, guid: f414046b173d2ad49afb4fc27c3cbae8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4587949343240129060, guid: f414046b173d2ad49afb4fc27c3cbae8, type: 3}
       propertyPath: m_Name
       value: Health_Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720328712783802160, guid: f414046b173d2ad49afb4fc27c3cbae8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8720419409469962663, guid: f414046b173d2ad49afb4fc27c3cbae8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1194,10 +1206,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4587949343240129060, guid: f414046b173d2ad49afb4fc27c3cbae8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 761474755}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f414046b173d2ad49afb4fc27c3cbae8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
