@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraBehavior : MonoBehaviour
@@ -14,6 +15,9 @@ public class CameraBehavior : MonoBehaviour
 
     void Start()
     {   
+        // BLOCCA il cursore al centro e lo NASCONDE
+        Cursor.lockState = CursorLockMode.Locked;
+        
         // Trova il player nella scena e salva il riferimento
         _target = GameObject.FindGameObjectWithTag("Player").transform;
     }
