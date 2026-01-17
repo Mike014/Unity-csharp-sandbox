@@ -10,7 +10,8 @@ public class LearningCurve7 : MonoBehaviour
     {
         Attack,
         Defend,
-        Flee
+        Flee,
+        Null
     };
 
     [SerializeField]
@@ -37,5 +38,7 @@ public class LearningCurve7 : MonoBehaviour
         {
             Debug.Log("No Player Action");
         }
+
+        Debug.Log("Mouse Posisition" + Input.mousePosition);
     }
 }
