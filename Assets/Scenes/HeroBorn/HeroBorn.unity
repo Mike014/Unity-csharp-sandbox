@@ -551,7 +551,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rotateSpeed: 75
+  rotateSpeed: 45
+  jumpVelocity: 5
+  distanceToGround: 0.1
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  bullet: {fileID: 377355042195994598, guid: 4115ebdf9b89b23488bfea1db51d6818, type: 3}
+  bulletSpeed: 100
 --- !u!114 &815260023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +566,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815260016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de546daa4a85d4c4ebdc299a07f48011, type: 3}
   m_Name: 
@@ -679,7 +686,7 @@ GameObject:
   - component: {fileID: 1143705153}
   - component: {fileID: 1143705152}
   - component: {fileID: 1143705151}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
