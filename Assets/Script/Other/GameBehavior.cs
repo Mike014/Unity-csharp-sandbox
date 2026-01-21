@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -9,6 +11,8 @@ public class GameBehavior : MonoBehaviour
     // Questi sono i dati reali, nascosti al mondo esterno.
     private int _itemsCollected = 0;
     private int _playerHP = 10;
+    private bool _isPaused = false;
+    private bool _isGameWon = false;
 
     // Variabili per le regole di gioco PUBBLICHE
     public int maxItems = 4;
@@ -18,14 +22,42 @@ public class GameBehavior : MonoBehaviour
     public TMP_Text itemText;
     public TMP_Text progressText;
 
+    // Riferimento al pulsante (da trascinare dall'Inspector)
+    public Button winButton;
+    public Button pauseButton;
+
     void Start()
     {
         // Inizializza: All'avvio scriviamo i valori di default
         itemText.text += _itemsCollected;
         healthText.text += _playerHP;
+        winButton.gameObject.SetActive(false);
+        pauseButton.gameObject.SetActive(false);
     }
 
+    void Update()
+    {
+        // Controlla se il gioco è vinto PRIMA di permettere la pausa
+        if (Input.GetKeyDown(KeyCode.Tab) && !_isGameWon)
+        {
+            // Toggle: se paused, riprendi; altrimenti, metti in pausa
+            _isPaused = !_isPaused;
 
+            if (_isPaused)
+            {
+                pauseButton.gameObject.SetActive(true);
+                winButton.gameObject.SetActive(false);
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                pauseButton.gameObject.SetActive(false);
+                winButton.gameObject.SetActive(false);
+                Time.timeScale = 1f;
+            }
+        }
+    }
+    
     // 1. PROPRIETÀ PUBBLICA per gli Oggetti
     // Notare che non ha parentesi () come un metodo, ma ha { get; set; }
     public int Items
@@ -38,20 +70,35 @@ public class GameBehavior : MonoBehaviour
         {
             // 'value' è una parola chiave magica che contiene il nuovo numero inviato (es. 5)
             _itemsCollected = value;
-
             itemText.text = "Items Collected: " + Items;
 
             if (_itemsCollected >= maxItems)
             {
                 progressText.text = "You've found all the items!";
+
+                Cursor.lockState = CursorLockMode.None;
+
+                // Imposta il flag _isGameWon = true
+                _isGameWon = true;
+
+                /*ATTIVAZIONE DEL PULSANTE
+                Riaccendiamo il GameObject del pulsante per mostrarlo a schermo
+                */
+                winButton.gameObject.SetActive(true);
+                pauseButton.gameObject.SetActive(false);
                 // Qui potresti anche aggiungere: Time.timeScale = 0; per mettere in pausa
-                Time.timeScale = 0;
+                Time.timeScale = 0f;
+                
+                // NOOO
+                // Premi tasto BackSpace per ricominciare la scena
+                // if(Input.GetKeyDown(KeyCode.Space))
+                // {
+                //     RestartScene();
+                // }
             }
             else
             {
                 progressText.text = "Item found, only " + (maxItems - _itemsCollected) + " more!";
-
-
                 //    // Possiamo aggiungere logica extra! Qui stampiamo un log ogni volta che il valore cambia.
                 //    Debug.LogFormat("Items: {0}", _itemsCollected);
             }
@@ -69,5 +116,27 @@ public class GameBehavior : MonoBehaviour
             // Aggiornamento salute
             healthText.text = "Player Health: " + HP;
         }
+    }
+
+    /*
+    METODO PER IL BOTTONE
+    Deve essere PUBLIC per poter essere visto dal sistema UI di Unity
+    */
+    public void RestartScene()
+    {
+        Debug.Log("RestartScene() è stato chiamato!");
+        
+        // MOSTRA IL CURSORE per permettere al giocatore di cliccare
+        Cursor.lockState = CursorLockMode.Confined;
+
+        // Ricarica il Livello
+        // Carica la scena all'indice 0 (la prima nella lista del progetto)
+        SceneManager.LoadScene(0);
+
+        //Ripristiana il tempo
+        // Se non lo fai il gioco rimarrà fermo
+        Time.timeScale = 1f;
+
+        Debug.Log("✅ Scena ricaricata!");
     }
 }

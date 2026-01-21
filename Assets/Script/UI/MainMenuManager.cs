@@ -62,7 +62,7 @@ public class MainMenuManager : MonoBehaviour
     public void OnNewGame()
     {
         Debug.Log("Caricamento Level 1...");
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene("HeroBorn");
     }
 
     // Bottone "Load Game" - Non interagibile
