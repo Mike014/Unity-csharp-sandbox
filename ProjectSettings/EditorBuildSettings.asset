@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Projects/Scenes/ExtraScenes/MainMenu.unity
     guid: a19ddaaa91f5f90428a08ba96c5fd5f5
   - enabled: 1
-    path: Assets/Scenes/HeroBorn/HeroBorn.unity
+    path: Assets/Projects/Scenes/HeroBorn/HeroBorn.unity
     guid: 000fee0ec8b56df418e230dce5ec27d5
   m_configObjects: {}

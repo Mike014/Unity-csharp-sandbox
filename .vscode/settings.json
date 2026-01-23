@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Learning-Csharp.sln"
+    "dotnet.defaultSolution": "Learning-Csharp.sln",
+    "dotnet.debug.suppressInvalidDebugTypeWarning": true
 }
