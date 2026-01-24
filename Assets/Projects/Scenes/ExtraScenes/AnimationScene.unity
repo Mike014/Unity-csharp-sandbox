@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &257560566 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400010, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
+  m_PrefabInstance: {fileID: 1039052634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &915918777
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +300,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 0
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -457,6 +462,10 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -478,6 +487,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2075609404}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2075609410}
   m_SourcePrefab: {fileID: 100100000, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
 --- !u!1 &1479830925
 GameObject:
@@ -617,6 +629,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 364.6, y: -30, z: 0}
+--- !u!4 &1905356592 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400070, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
+  m_PrefabInstance: {fileID: 1039052634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2075609401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
@@ -639,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ce49e02fbfe4745b9d08bd1b862d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2
   rotationSpeed: 10
   gravity: -9.81
   movementSmoothTime: 0.15
@@ -695,6 +712,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2075609410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075609401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9d82d6c4ef924438121f391871307c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoint1: {fileID: 257560566}
+  spawnPoint2: {fileID: 1905356592}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
