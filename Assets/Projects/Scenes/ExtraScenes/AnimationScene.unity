@@ -183,7 +183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ebd5d032d3b02c448a99c065849b4a4f, type: 2}
+  - {fileID: 2100000, guid: ced79df4c61be944ebd375675f38a69f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -223,7 +223,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 18.98, y: 1, z: 5}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -287,7 +287,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 1000
+  far clip plane: 500
   field of view: 18
   orthographic: 0
   orthographic size: 5
@@ -551,12 +551,12 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.509434, g: 0.08362404, b: 0.46652836, a: 1}
+  m_Color: {r: 0.254717, g: 0.20287122, b: 0.044455323, a: 1}
   m_Intensity: 1.29
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize: 100
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -610,13 +610,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616470336}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.038764413, y: 0.25861052, z: -0.010386892, w: -0.9651477}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 364.6, y: -30, z: 0}
 --- !u!1 &2075609401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: fa0856ce0c0b3fb42af36e6c53346129, type: 3}
@@ -642,8 +642,12 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 10
   gravity: -9.81
-  neckRotationOffset: {x: 0, y: 0, z: 0}
-  maxNeckAngle: 90
+  movementSmoothTime: 0.15
+  lookWeight: 1
+  bodyWeight: 0.3
+  headWeight: 1
+  clampWeight: 0.5
+  lookDistance: 20
 --- !u!65 &2075609406
 BoxCollider:
   m_ObjectHideFlags: 0

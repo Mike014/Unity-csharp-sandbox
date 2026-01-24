@@ -5,15 +5,23 @@ public class PlayerControllerAnimation : MonoBehaviour
     private Animator animator;
     private CharacterController characterController;
     private Camera mainCamera;
-    private Transform neckTransform;
 
+    [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float gravity = -9.81f;
+    
+    // Variabili per lo smoothing del movimento fisico
+    [SerializeField] private float movementSmoothTime = 0.15f; 
+    private Vector3 currentMoveVelocity;
+    private Vector3 currentMoveDir; // Direzione attuale smussata
 
-    [Header("Limiti Rotazione Collo")]
-    [SerializeField] private Vector3 neckRotationOffset = new Vector3(0f, 0f, 0f);
-    [SerializeField] private float maxNeckAngle = 90f; // Limite umano (90° a DX e 90° a SX = 180° totali)
+    [Header("Head Look Settings")]
+    [SerializeField] private float lookWeight = 1f;
+    [SerializeField] private float bodyWeight = 0.3f; // Quanto il corpo aiuta la testa
+    [SerializeField] private float headWeight = 1f;
+    [SerializeField] private float clampWeight = 0.5f;
+    [SerializeField] private float lookDistance = 20f; // Quanto lontano guarda
 
     private float verticalVelocity = 0f;
 
@@ -23,29 +31,24 @@ public class PlayerControllerAnimation : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         mainCamera = Camera.main;
 
-        // Attiva il peso del layer se necessario
-        animator.SetLayerWeight(1, 1f);
-
-        Transform[] allChildren = GetComponentsInChildren<Transform>();
-        foreach (Transform child in allChildren)
-        {
-            if (child.name == "Neck")
-            {
-                neckTransform = child;
-                break;
-            }
-        }
+        // Abilita il layer IK se presente (assicurati che il layer 1 sia per l'IK o upper body)
+        // Se usi solo un layer base, questo non serve o va messo a 0.
+        // animator.SetLayerWeight(1, 1f); 
     }
 
     void Update()
     {
-        // Movimento standard (come da tuo codice)
+        // 1. INPUT
         float inputVertical = Input.GetAxis("Vertical");
         float inputHorizontal = Input.GetAxis("Horizontal");
 
-        animator.SetFloat("Vertical", inputVertical);
-        animator.SetFloat("Horizontal", inputHorizontal);
+        // 2. ANIMAZIONE FLUIDA (Best Practice)
+        // Invece di passare inputVertical grezzo, usiamo il dampTime (0.1f)
+        // Questo fa sì che l'animatore interpoli i valori nel tempo.
+        animator.SetFloat("Vertical", inputVertical, 0.1f, Time.deltaTime);
+        animator.SetFloat("Horizontal", inputHorizontal, 0.1f, Time.deltaTime);
 
+        // 3. CALCOLO DIREZIONE CAMERA
         Vector3 cameraForward = mainCamera.transform.forward;
         Vector3 cameraRight = mainCamera.transform.right;
         cameraForward.y = 0;
@@ -53,53 +56,47 @@ public class PlayerControllerAnimation : MonoBehaviour
         cameraForward.Normalize();
         cameraRight.Normalize();
 
-        Vector3 movimento = (cameraForward * inputVertical + cameraRight * inputHorizontal).normalized;
+        Vector3 targetDirection = (cameraForward * inputVertical + cameraRight * inputHorizontal).normalized;
 
-        if (movimento.magnitude > 0.1f)
+        // 4. MOVIMENTO FISICO FLUIDO (SmoothDamp)
+        // Invece di applicare subito targetDirection, interpoliamo verso di essa.
+        // Questo crea inerzia: il personaggio non parte e si ferma all'istante.
+        currentMoveDir = Vector3.SmoothDamp(currentMoveDir, targetDirection, ref currentMoveVelocity, movementSmoothTime);
+
+        // 5. ROTAZIONE DEL CORPO
+        // Ruotiamo solo se c'è un input significativo, ma usiamo la direzione target per la rotazione
+        if (targetDirection.magnitude > 0.1f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movimento);
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        Vector3 finalMove = movimento * moveSpeed;
+        // 6. APPLICAZIONE MOVIMENTO
+        // Usiamo currentMoveDir (la versione smussata) per muoverci
+        Vector3 finalMove = currentMoveDir * moveSpeed;
+        
+        // Gravità
+        if (characterController.isGrounded && verticalVelocity < 0) verticalVelocity = -2f;
         verticalVelocity += gravity * Time.deltaTime;
         finalMove.y = verticalVelocity;
-        characterController.Move(finalMove * Time.deltaTime);
 
-        if (characterController.isGrounded && verticalVelocity < 0) verticalVelocity = -2f;
+        characterController.Move(finalMove * Time.deltaTime);
     }
 
+    // Usiamo OnAnimatorIK per gestire lo sguardo in modo nativo Unity
     void OnAnimatorIK(int layerIndex)
     {
-        // Eseguiamo la logica solo sul layer con la maschera (Layer 1)
-        if (layerIndex != 1) return;
-        if (animator == null || !animator.isHuman || neckTransform == null) return;
+        if (animator == null) return;
 
-        // 1. NUOVA LOGICA: Prendi la direzione in cui punta il mouse (Camera Forward)
-        // Non calcoliamo più la distanza dalla camera, usiamo il suo orientamento
-        Vector3 lookDirection = mainCamera.transform.forward;
+        // Definiamo dove guardare. 
+        // Se è un TPS, "dove punta il mouse" significa "un punto lungo il forward della camera".
+        Vector3 lookAtTarget = mainCamera.transform.position + (mainCamera.transform.forward * lookDistance);
 
-        // Opzionale: azzeriamo la Y se vogliamo che la testa giri solo a destra/sinistra
-        // Se vuoi che guardi anche in alto/basso, commenta la riga sotto
-        lookDirection.y = 0f;
-        lookDirection.Normalize();
+        // Impostiamo il target dello sguardo
+        animator.SetLookAtPosition(lookAtTarget);
 
-        // 2. CALCOLA L'ANGOLO RELATIVO
-        // Confrontiamo il petto del player (transform.forward) con la mira della camera
-        float angleBetween = Vector3.SignedAngle(transform.forward, lookDirection, Vector3.up);
-
-        // 3. APPLICA IL LIMITE UMANO (CLAMP)
-        // Impedisce alla testa di girare oltre i gradi impostati (es. 90°)
-        angleBetween = Mathf.Clamp(angleBetween, -maxNeckAngle, maxNeckAngle);
-
-        // 4. CREA LA ROTAZIONE LOCALE
-        // Ruotiamo l'osso Neck sull'asse verticale (Vector3.up) in base all'angolo limitato
-        Quaternion localNeckRotation = Quaternion.AngleAxis(angleBetween, Vector3.up);
-
-        // Applichiamo l'offset necessario per gli skeleton di Mixamo
-        localNeckRotation *= Quaternion.Euler(neckRotationOffset);
-
-        // 5. APPLICA ALL'ANIMATOR
-        animator.SetBoneLocalRotation(HumanBodyBones.Neck, localNeckRotation);
+        // Impostiamo i pesi (quanto intensamente guardare)
+        // weight globale, body, head, eyes, clamp (0-1)
+        animator.SetLookAtWeight(lookWeight, bodyWeight, headWeight, 1f, clampWeight);
     }
 }
