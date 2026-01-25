@@ -16,7 +16,7 @@ public class CameraBehavior : MonoBehaviour
     void Start()
     {   
         // BLOCCA il cursore al centro e lo NASCONDE
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
         
         // Trova il player nella scena e salva il riferimento
         _target = GameObject.FindGameObjectWithTag("Player").transform;
