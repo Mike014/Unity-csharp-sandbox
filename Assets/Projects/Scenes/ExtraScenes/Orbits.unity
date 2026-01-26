@@ -335,7 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nucleus: {fileID: 595646579}
   _electronPrefab: {fileID: 8826908614561960957, guid: bedb320241269e645969f3fc2d99f0d1, type: 3}
-  _electronCount: 6
+  _electronCount: 12
   _shellRadius: 3
   _electronSpeed: 180
   _lineWidth: 0.05
