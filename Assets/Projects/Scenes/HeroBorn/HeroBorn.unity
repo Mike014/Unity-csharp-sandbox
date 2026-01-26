@@ -227,6 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 128537125}
   - component: {fileID: 128537126}
+  - component: {fileID: 128537127}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -267,6 +268,19 @@ MonoBehaviour:
   progressText: {fileID: 1457195461}
   winButton: {fileID: 1089792222}
   pauseButton: {fileID: 1535100201}
+--- !u!114 &128537127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128537124}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd6c916806f07641857d76245700198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  a: 5
 --- !u!1 &135395267
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +467,7 @@ GameObject:
   - component: {fileID: 289656167}
   - component: {fileID: 289656168}
   - component: {fileID: 289656169}
+  - component: {fileID: 289656170}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -624,7 +639,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289656159}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd236b8bfd19cbe45977ca31ea8fc65b, type: 3}
   m_Name: 
@@ -632,6 +647,21 @@ MonoBehaviour:
   patrolRoute: {fileID: 591942118}
   locations:
   - {fileID: 0}
+--- !u!114 &289656170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289656159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983ba4e8f68a40e42a40bbb08bedb431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 815260016}
+  speed: 5
+  stoppingDistance: 7
 --- !u!1 &371086913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,7 +1429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rotateSpeed: 45
+  rotateSpeed: 150
   jumpVelocity: 5
   distanceToGround: 0.1
   GroundLayer:
