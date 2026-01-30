@@ -22,11 +22,11 @@ public class LifeController : MonoBehaviour
         if (uiController != null)
         {
             onHealthChanged.AddListener(uiController.UpdateHealthBar);
-            Debug.Log("✅ UI_LifeController trovato e collegato!");
+            Debug.Log("UI_LifeController trovato e collegato!");
         }
         else
         {
-            Debug.LogError("❌ UI_LifeController non trovato!");
+            Debug.LogError("UI_LifeController non trovato!");
         }
 
         onHealthChanged.Invoke(currentHealth, maxHealth);
