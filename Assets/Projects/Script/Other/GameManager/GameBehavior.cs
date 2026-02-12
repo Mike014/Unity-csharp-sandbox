@@ -196,10 +196,12 @@ public class GameBehaviour : MonoBehaviour, IManager
 
     public void FilterLoot()
     {
-        // var rareLoot = LootStack.Where(item => item.rarity >= 3);
+        // var rareLoot = LootStack.Where(item => item.rarity >= 3); // => "goes to"
+
         var rareLoot = LootStack
-            .Where(item => item.rarity >= 3)
-            .OrderBy(item => item.rarity);
+            .Where(item => item.rarity >= 3) // Condizione
+            .OrderBy(item => item.rarity) // Filtro
+            .Select(item => new{ item.name}); // Selezione un oggetto specifico
 
         foreach (var item in rareLoot)
         {
