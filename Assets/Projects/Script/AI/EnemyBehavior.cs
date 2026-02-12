@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyBehavior : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour
 {
     // Il Transform dell'oggetto "Padre" che contiene tutti i punti di pattuglia
     // Il componente Transform contiene position e rotation. 
@@ -20,7 +20,7 @@ public class EnemyBehavior : MonoBehaviour
     // Variabili private per lo stato interno
     private int _locationIndex = 0;
     private NavMeshAgent _agent;
-    private GameBehavior _gameManager;
+    private GameBehaviour _gameManager;
     private Rigidbody _rb;
     private CapsuleCollider _col;
     private int _lives = 3;
@@ -39,7 +39,7 @@ public class EnemyBehavior : MonoBehaviour
         // Troviamo il Player automaticamente all'avvio della scena
         // Cerca nella gerarchia un oggeto che si chiama esettamente Player
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        _gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameBehaviour>();
 
         // Prepariamo i dati necessari prima che il nemico inizi a muoversi
         InitializePatrolRoute();

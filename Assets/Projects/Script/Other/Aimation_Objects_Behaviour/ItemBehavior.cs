@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBehavior : MonoBehaviour 
+public class ItemBehaviour : MonoBehaviour 
 {
     // Creiamo una variabile del TIPO del nostro script manager
     // Non è un int o string, è proprio "GameBehavior"
-    public GameBehavior gameManager;
+    public GameBehaviour gameManager;
 
     void Start()
     {
@@ -14,7 +14,7 @@ public class ItemBehavior : MonoBehaviour
         RICERCA AUTOMATICA
         Cercare nella scena un oggetto chiamato "Game Manager"e di estrarre il componente <GameBehavior> attaccato ad esso.
         */
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameBehaviour>();
     }
     // Questo metodo viene chiamato AUTOMATICAMENTE da Unity quando avviene un urto fisico
     void OnCollisionEnter(Collision collision)
@@ -34,6 +34,7 @@ public class ItemBehavior : MonoBehaviour
             Questo farà scattare automaticamente il Debug.Log che abbiamo messo nel 'set' del Manager.
             */
             gameManager.Items += 1;
+            gameManager.PrintLootReport();
         }
     }
 }

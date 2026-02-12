@@ -43,7 +43,7 @@ public class WanderState : BaseState
         // STEP 2: Sposta la sfera sulla posizione corrente del nemico
         randomDirection += controller.transform.position;
         // ↑ Ora randomDirection è un punto casuale in un raggio di 10m dal nemico
-        Debug.Log("Random Direction : "+ randomDirection);
+        // Debug.Log("Random Direction : "+ randomDirection);
 
         NavMeshHit hit;
 

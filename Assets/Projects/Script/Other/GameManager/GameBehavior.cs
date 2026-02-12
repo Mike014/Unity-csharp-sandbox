@@ -6,14 +6,17 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using CustomExtensions;
+using System.Linq;
 
-public class GameBehavior : MonoBehaviour, IManager
+public class GameBehaviour : MonoBehaviour, IManager
 {
+    #region Fields
+    // public Variables
+    public Stack<Loot> LootStack = new Stack<Loot>();
 
-    // Costanti
+    // Costanti  
     const int value = 35;
 
-    #region Fields
     // Dati dell'Interfaccia IManager
     private string _state;
 
@@ -54,7 +57,7 @@ public class GameBehavior : MonoBehaviour, IManager
         // Valore della const stampata a schermo
         Debug.Log("Questo è il const value : " + value);
 
-        IManager manager = FindObjectOfType<GameBehavior>();
+        IManager manager = FindObjectOfType<GameBehaviour>();
         manager.Initialize();
 
         // Inizializza: All'avvio scriviamo i valori di default
@@ -66,6 +69,13 @@ public class GameBehavior : MonoBehaviour, IManager
     public void Initialize()
     {
         _state = "Game Manager initialized...";
+
+        // Aggiungiamo oggetti alla pila
+        LootStack.Push(new Loot("Sword of Doom", 5));
+        LootStack.Push(new Loot("HP Boost", 1));
+        LootStack.Push(new Loot("Golden Key", 3));
+        LootStack.Push(new Loot("Pair of Winged Boots", 2));
+        LootStack.Push(new Loot("Mythril Bracer", 4)); // Questo sarà il PRIMO a essere estratto
 
         // Utilizzo la Custom Extensions
         _state.FancyDebug();
@@ -156,7 +166,7 @@ public class GameBehavior : MonoBehaviour, IManager
         //Ripristiana il tempo
         // Se non lo fai il gioco rimarrà fermo
         Time.timeScale = 1f;
-        Debug.Log("✅ Scena ricaricata!");
+        Debug.Log("Scena ricaricata!");
         */
 
         // Classe statica, non ha bisongo di essere dichiaraa new Utilities()
@@ -165,6 +175,41 @@ public class GameBehavior : MonoBehaviour, IManager
         Utilities.RestartLevel();
 
         Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void PrintLootReport()
+    {
+        // Rimuove e restituisce l'ulimo oggetto aggiunto (LIFO)
+        var currentItem = LootStack.Pop();
+
+        // Guarda l'oggetto che ora si trova in cima, senza rimuoverlo
+        // Con "var". Il compilatore deduce automaticamente il tipo dalla parte destra dell'assegnazione.
+        var nextItem = LootStack.Peek();
+
+        // 3. Stampa il loot ottenuto e un'anticipazione del prossimo
+        Debug.LogFormat("You got a {0}! You've got a good chance of finding a {1} next!",
+                        currentItem.name, nextItem.name);
+
+        // Mostra quanti elementi rimangono nello Stack
+        Debug.LogFormat("There are {0} random loot items waiting for you!", LootStack.Count);
+    }
+
+    public void FilterLoot()
+    {
+        // var rareLoot = LootStack.Where(item => item.rarity >= 3);
+        var rareLoot = LootStack
+            .Where(item => item.rarity >= 3)
+            .OrderBy(item => item.rarity);
+
+        foreach (var item in rareLoot)
+        {
+            Debug.LogFormat("Rare item: {0}!", item.name);
+        }
+    }
+
+    public bool LootPredicate(Loot loot)
+    {
+        return loot.rarity >= 3;
     }
     #endregion
 }
