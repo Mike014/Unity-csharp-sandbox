@@ -1,12 +1,21 @@
 using UnityEngine;
+using System;
 
 public class Telecomando : MonoBehaviour
 {
     // Dichiariamo la firma del delegato (il tipo)
-    public delegate void Azione();
+    // public delegate void Azione();
 
     // Creiamo la variabile (l'istanza) a cui gli altri si iscriveranno
-    public Azione OnPulsantePremuto;
+    public event Action OnPulsantePremuto;
+
+    void Start()
+    {
+        OnPulsantePremuto += () =>
+        {
+            Debug.Log("Suono: Beep");
+        };
+    }
 
     void Update()
     {

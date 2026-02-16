@@ -4,7 +4,7 @@ public class Lampadina : MonoBehaviour
 {
     // Riferimento al telecomando per potersi iscrivere
     public Telecomando ilMioTelecomando;
-
+    
     // Chiamata quando l'oggetto si attiva
     void OnEnable()
     {
