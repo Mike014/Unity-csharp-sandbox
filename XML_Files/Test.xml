@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWeapon>
+    <weapon>
+        <name>Sword of Doom</name>
+        <damage>100</damage>
+    </weapon>
+    <weapon>
+        <name>Butterfly knives</name>
+        <damage>25</damage>
+    </weapon>
+    <weapon>
+        <name>Brass Knuckls</name>
+        <damage>15</damage>
+    </weapon>
+</ArrayOfWeapon>
