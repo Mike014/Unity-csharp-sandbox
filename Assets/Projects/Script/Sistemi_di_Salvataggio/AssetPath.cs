@@ -12,7 +12,7 @@ public class AssetPath : MonoBehaviour
     {
         try
         {
-            
+
             // 2. Awake è il primo evento ufficiale di Unity. Ora le API sono pronte!
             _saveFolder = Path.Combine(Application.persistentDataPath, "Saves");
 
