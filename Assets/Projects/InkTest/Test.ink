@@ -54,4 +54,5 @@ Ti avvicini a una vecchia scrivania di quercia coperta di scartoffie.
 - (fine_ispezione) // QUESTO È IL GATHER
 // Indipendentemente da quale cassetto hai aperto, o come lo hai aperto, il flusso atterra qui.
 Fai un passo indietro e ti guardi di nuovo attorno. La stanza è buia.
+
 -> END
