@@ -475,7 +475,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 537950799}
-  - component: {fileID: 537950800}
   - component: {fileID: 537950801}
   m_Layer: 0
   m_Name: StoryManager
@@ -499,19 +498,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2009679605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &537950800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537950798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93e3a8c172910454fab777587955e2a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inkAsset: {fileID: 4900000, guid: d3d8bbf7fd85e214e97c6c822eb6bf8f, type: 3}
 --- !u!114 &537950801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e3a8c172910454fab777587955e2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkAsset: {fileID: 4900000, guid: d3d8bbf7fd85e214e97c6c822eb6bf8f, type: 3}
+  inkAsset: {fileID: 4900000, guid: 89289b0d49340ac47ae951ba462a207f, type: 3}
 --- !u!1 &559832851
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +560,7 @@ MonoBehaviour:
   - {fileID: 1654918268}
   - {fileID: 239025350}
   - {fileID: 333290211}
-  _storyManager: {fileID: 537950800}
+  _storyManager: {fileID: 537950801}
 --- !u!1 &618696080
 GameObject:
   m_ObjectHideFlags: 0
