@@ -59,4 +59,3 @@ Debug.Log(dragon.GetAttack());
 Debug.Log(troll.GetAttack());
 */
 
-  
